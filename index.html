@@ -7,15 +7,14 @@
 <meta name="description" content="The Cognition Blocks Intelligence (CBI) Framework. Discover the cognitive architecture you've been using your entire life. Start with your Parser Profile." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
    COGNITION BLOCKS LLC — HOMEPAGE
-   Clean, editorial, authoritative. Dark ink on warm white.
-   Fonts: Cormorant Garamond (display) + DM Sans (body)
+   High-end editorial. Warm cream, off-black ink, single gold accent.
+   Premium treatment: double-bezel cards, pill CTAs, scroll reveals,
+   macro whitespace, asymmetric bento. Cormorant Garamond + DM Sans.
    ============================================================ */
-html { scroll-behavior: smooth; }
-html, body { margin: 0; padding: 0; }
 
 :root {
   --ink: #0F0D0A;
@@ -23,49 +22,134 @@ html, body { margin: 0; padding: 0; }
   --ink-muted: #6B6660;
   --gold: #B8892A;
   --gold-light: #D4A843;
-  --cream: #FAFAF7;
-  --cream-warm: #F4F2ED;
-  --border: #E4E0D8;
-  --blue: #1B3A6B;
+  --cream: #FDFBF7;
+  --cream-warm: #F4F1EA;
+  --card: #FFFEFB;
+  --border: #E7E2D8;
+
+  --r-card: 28px;
+  --r-inner: 22px;
+  --r-sm: 16px;
+  --r-pill: 999px;
+
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --shadow-soft: 0 1px 2px rgba(15,13,10,0.04), 0 18px 40px -22px rgba(15,13,10,0.20);
+  --shadow-lift: 0 2px 4px rgba(15,13,10,0.05), 0 30px 60px -28px rgba(15,13,10,0.28);
+  --maxw: 1080px;
 }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; }
 
 .cb-page {
   font-family: 'DM Sans', sans-serif;
   background: var(--cream);
   color: var(--ink);
-  margin: 0;
-  padding: 0;
   -webkit-font-smoothing: antialiased;
-  scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;
 }
-.cb-page * { box-sizing: border-box; }
+
+/* Fine grain overlay — fixed, never on scrolling content */
+.cb-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.cb-page > *:not(.cb-grain) { position: relative; z-index: 2; }
+
+/* ── SCROLL REVEAL ────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  filter: blur(8px);
+  transition: opacity 0.8s var(--ease), transform 0.9s var(--ease), filter 0.8s var(--ease);
+  transition-delay: var(--rd, 0s);
+  will-change: transform, opacity;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; filter: none; transition: none; }
+}
+
+/* ── BUTTONS (pill + button-in-button icon) ───────────── */
+.cb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  padding: 12px 14px 12px 26px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--ink);
+  transition: background 0.5s var(--ease), color 0.5s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.cb-btn .cb-btn-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.14);
+  font-size: 15px;
+  transition: transform 0.5s var(--ease), background 0.5s var(--ease);
+}
+.cb-btn:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: var(--shadow-lift);
+  transform: translateY(-1px);
+}
+.cb-btn:hover .cb-btn-icon { transform: translateX(4px); background: rgba(255,255,255,0.22); }
+
+.cb-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border);
+}
+.cb-btn-ghost .cb-btn-icon { background: rgba(15,13,10,0.06); }
+.cb-btn-ghost:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.cb-btn-ghost:hover .cb-btn-icon { background: rgba(255,255,255,0.16); }
 
 /* ── HEADER ───────────────────────────────────────────── */
 .cb-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(250,250,247,0.92);
-  backdrop-filter: saturate(180%) blur(8px);
-  -webkit-backdrop-filter: saturate(180%) blur(8px);
-  border-bottom: 1px solid var(--border);
+  z-index: 50;
+  background: rgba(253,251,247,0.78);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid rgba(231,226,216,0.7);
 }
 .cb-header-inner {
-  max-width: 1000px;
+  max-width: var(--maxw);
   margin: 0 auto;
-  padding: 16px 40px;
+  padding: 14px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
-/* Logo: CBI emblem image + wordmark */
 .cb-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none !important;
-  color: var(--ink) !important;
+  text-decoration: none;
+  color: var(--ink);
 }
 .cb-logo-img {
   width: 42px;
@@ -73,13 +157,14 @@ html, body { margin: 0; padding: 0; }
   flex-shrink: 0;
   display: block;
   object-fit: contain;
+  border-radius: 10px;
 }
-.cb-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.cb-logo-text { display: flex; flex-direction: column; line-height: 1.12; }
 .cb-logo-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: var(--ink);
 }
 .cb-logo-sub {
@@ -89,97 +174,167 @@ html, body { margin: 0; padding: 0; }
   text-transform: uppercase;
   color: var(--gold);
 }
-.cb-nav { display: flex; align-items: center; gap: 28px; }
-.cb-nav a {
-  font-family: 'DM Sans', sans-serif;
+.cb-nav { display: flex; align-items: center; gap: 30px; }
+.cb-nav-links { display: flex; align-items: center; gap: 30px; }
+.cb-nav-links a {
   font-size: 12px;
   font-weight: 500;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: var(--ink-soft) !important;
-  text-decoration: none !important;
-  transition: color 0.2s ease;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.4s var(--ease);
 }
-.cb-nav a:hover { color: var(--gold) !important; }
-.cb-nav .cb-nav-cta { color: var(--gold) !important; }
+.cb-nav-links a:hover { color: var(--gold); }
+.cb-nav .cb-btn { padding: 9px 9px 9px 20px; font-size: 12px; letter-spacing: 1px; }
+.cb-nav .cb-btn .cb-btn-icon { width: 28px; height: 28px; }
 
-/* ── HERO ─────────────────────────────────────────────── */
-.cb-hero {
-  min-height: calc(100vh - 61px);
+/* Hamburger */
+.cb-burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+.cb-burger span {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.45s var(--ease), opacity 0.3s var(--ease);
+}
+.cb-burger span:nth-child(1) { top: 17px; }
+.cb-burger span:nth-child(2) { bottom: 17px; }
+body.cb-menu-open .cb-burger span:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+body.cb-menu-open .cb-burger span:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
+
+/* Mobile overlay menu */
+.cb-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(15,13,10,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 40px 60px;
-  max-width: 860px;
-  margin: 0 auto;
-  position: relative;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0 32px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s var(--ease), visibility 0.5s var(--ease);
 }
-.cb-hero-eyebrow {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+body.cb-menu-open .cb-mobile-menu { opacity: 1; visibility: visible; }
+.cb-mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--cream);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s var(--ease);
+}
+.cb-mobile-menu a:hover { color: var(--gold-light); }
+body.cb-menu-open .cb-mobile-menu a { opacity: 1; transform: none; }
+body.cb-menu-open .cb-mobile-menu a:nth-child(1) { transition-delay: 0.12s; }
+body.cb-menu-open .cb-mobile-menu a:nth-child(2) { transition-delay: 0.18s; }
+body.cb-menu-open .cb-mobile-menu a:nth-child(3) { transition-delay: 0.24s; }
+body.cb-menu-open .cb-mobile-menu a:nth-child(4) { transition-delay: 0.30s; }
+
+/* ── SHARED ───────────────────────────────────────────── */
+.cb-eyebrow {
+  display: inline-block;
+  font-size: 10.5px;
   font-weight: 500;
-  letter-spacing: 4px;
+  letter-spacing: 2.2px;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 32px;
+  border: 1px solid rgba(184,137,42,0.32);
+  border-radius: var(--r-pill);
+  padding: 6px 14px;
 }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.cb-hero {
+  position: relative;
+  min-height: calc(100vh - 71px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 40px 80px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.cb-hero::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -20%;
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle, rgba(212,168,67,0.22), rgba(212,168,67,0) 68%);
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: -1;
+}
+.cb-hero-eyebrow { margin-bottom: 34px; }
 .cb-hero-story {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 4vw, 44px);
+  font-size: clamp(28px, 4vw, 46px);
   font-weight: 300;
   line-height: 1.4;
   color: var(--ink);
-  margin-bottom: 48px;
+  margin: 0 0 44px;
 }
 .cb-hero-story em { font-style: italic; color: var(--ink-soft); }
 .cb-hero-story strong { font-weight: 600; color: var(--ink); }
-.cb-divider { width: 48px; height: 2px; background: var(--gold); margin: 0 0 40px 0; }
+.cb-divider { width: 52px; height: 2px; background: var(--gold); margin: 0 0 38px; }
 .cb-hero-body {
   font-size: 17px;
   font-weight: 300;
   line-height: 1.75;
   color: var(--ink-soft);
   max-width: 600px;
-  margin-bottom: 48px;
+  margin: 0 0 44px;
 }
-.cb-cta-block { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
-.cb-btn-primary {
-  display: inline-block;
-  background: var(--ink);
-  color: var(--cream) !important;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-decoration: none !important;
-  padding: 16px 36px;
-  border: 2px solid var(--ink);
-  transition: all 0.2s ease;
-}
-.cb-btn-primary:hover { background: transparent; color: var(--ink) !important; }
+.cb-cta-block { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; }
 .cb-cta-meta { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
-.cb-cta-meta strong { color: var(--gold); font-weight: 500; }
 
-/* ── REFRAME ──────────────────────────────────────────── */
-.cb-reframe { background: var(--ink); padding: 80px 40px; }
-.cb-reframe-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-.cb-reframe-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 32px;
+/* ── REFRAME (dark) ───────────────────────────────────── */
+.cb-reframe {
+  position: relative;
+  background: var(--ink);
+  padding: 140px 40px;
+  overflow: hidden;
 }
+.cb-reframe::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 760px;
+  height: 420px;
+  background: radial-gradient(ellipse, rgba(184,137,42,0.16), rgba(184,137,42,0) 70%);
+  pointer-events: none;
+}
+.cb-reframe-inner { position: relative; max-width: 720px; margin: 0 auto; text-align: center; }
+.cb-reframe-label { margin-bottom: 36px; }
 .cb-reframe-text {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(24px, 3.5vw, 38px);
   font-weight: 300;
   line-height: 1.5;
   color: var(--cream);
-  margin-bottom: 32px;
+  margin: 0 0 32px;
 }
 .cb-reframe-close {
   font-family: 'Cormorant Garamond', serif;
@@ -191,65 +346,86 @@ html, body { margin: 0; padding: 0; }
 }
 
 /* ── PLATFORM ─────────────────────────────────────────── */
-.cb-platform { padding: 100px 40px; background: var(--cream-warm); }
-.cb-platform-inner { max-width: 1000px; margin: 0 auto; }
-.cb-platform-header { text-align: center; margin-bottom: 60px; }
-.cb-platform-eyebrow {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
+.cb-platform { padding: 140px 40px; background: var(--cream-warm); }
+.cb-platform-inner { max-width: var(--maxw); margin: 0 auto; }
+.cb-platform-header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
+.cb-platform-header .cb-eyebrow { margin-bottom: 24px; }
 .cb-platform-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(34px, 4.4vw, 56px);
   font-weight: 300;
   color: var(--ink);
-  line-height: 1.2;
-  margin-bottom: 20px;
+  line-height: 1.15;
+  margin: 0 0 22px;
 }
 .cb-platform-subtitle {
   font-size: 16px;
   font-weight: 300;
   color: var(--ink-muted);
-  max-width: 520px;
-  margin: 0 auto;
   line-height: 1.7;
+  margin: 0;
+}
+.cb-platform-subtitle strong { color: var(--ink-soft); font-weight: 500; }
+
+/* Double-bezel image frame */
+.cb-bezel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(231,226,216,0.5));
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.05);
+  padding: 8px;
+  border-radius: var(--r-card);
+  margin: 0 auto 56px;
+  max-width: 940px;
 }
 .cb-city-image {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto 60px;
   display: block;
-  border: 1px solid var(--border);
+  width: 100%;
+  border-radius: var(--r-inner);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
 }
+
+/* Asymmetric bento */
 .cb-cities {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
 }
-.cb-city { background: var(--cream); padding: 36px 32px; }
+.cb-city {
+  background: var(--card);
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.05), var(--shadow-soft);
+  border-radius: var(--r-card);
+  padding: 38px 36px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+.cb-city:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(15,13,10,0.06), var(--shadow-lift); }
+.cb-city:nth-child(1) { grid-column: span 7; }
+.cb-city:nth-child(2) { grid-column: span 5; }
+.cb-city:nth-child(3) { grid-column: span 5; }
+.cb-city:nth-child(4) { grid-column: span 7; }
+.cb-city.is-live {
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.5), var(--shadow-lift);
+}
 .cb-city-name {
-  font-family: 'DM Sans', sans-serif;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 3px;
+  letter-spacing: 2.6px;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .cb-city-desc {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--ink-soft);
-  line-height: 1.6;
-  margin-bottom: 16px;
+  line-height: 1.55;
+  margin: 0 0 22px;
+  flex: 1;
 }
+.cb-city.is-live .cb-city-desc { color: rgba(253,251,247,0.86); }
+.cb-city.is-live .cb-city-name { color: var(--gold-light); }
 .cb-city-status {
   font-size: 12px;
   font-weight: 500;
@@ -257,125 +433,151 @@ html, body { margin: 0; padding: 0; }
   text-transform: uppercase;
   color: var(--ink-muted);
 }
-.cb-city-status.live { color: #2A6B3A; }
+.cb-city-status.live { color: var(--gold-light); display: inline-flex; align-items: center; gap: 8px; }
+.cb-city-status.live::before {
+  content: "";
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ADE80;
+  box-shadow: 0 0 0 4px rgba(74,222,128,0.18);
+}
 
 /* ── NOW AVAILABLE ────────────────────────────────────── */
-.cb-now { padding: 100px 40px; background: var(--cream); }
-.cb-now-inner { max-width: 700px; margin: 0 auto; }
-.cb-now-eyebrow {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 32px;
-}
+.cb-now { padding: 140px 40px; background: var(--cream); }
+.cb-now-inner { max-width: 720px; margin: 0 auto; }
+.cb-now-eyebrow { margin-bottom: 30px; }
 .cb-now-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-size: clamp(30px, 3.8vw, 44px);
   font-weight: 300;
   color: var(--ink);
-  line-height: 1.3;
-  margin-bottom: 24px;
+  line-height: 1.25;
+  margin: 0 0 24px;
 }
 .cb-now-body {
   font-size: 16px;
   font-weight: 300;
   color: var(--ink-soft);
   line-height: 1.75;
-  margin-bottom: 48px;
+  margin: 0 0 52px;
+}
+/* Double-bezel assessment card */
+.cb-assessment-bezel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(231,226,216,0.55));
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.05);
+  padding: 8px;
+  border-radius: var(--r-card);
+  margin-bottom: 28px;
 }
 .cb-assessment-card {
-  border: 1px solid var(--border);
-  padding: 48px 40px;
-  background: var(--cream-warm);
-  margin-bottom: 24px;
+  background: var(--card);
+  border-radius: var(--r-inner);
+  padding: 48px 44px;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), var(--shadow-soft);
 }
 .cb-assessment-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 600;
   color: var(--ink);
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 .cb-assessment-desc {
   font-size: 15px;
   font-weight: 300;
   color: var(--ink-soft);
-  line-height: 1.7;
-  margin-bottom: 32px;
+  line-height: 1.75;
+  margin: 0 0 34px;
 }
 .cb-ptc-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 0;
-  border-top: 1px solid var(--border);
-  text-decoration: none !important;
-  color: var(--ink) !important;
-  transition: all 0.2s ease;
+  gap: 16px;
+  padding: 26px 30px;
+  background: var(--card);
+  border-radius: var(--r-card);
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.05), var(--shadow-soft);
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
 }
-.cb-ptc-link:hover { color: var(--gold) !important; }
-.cb-ptc-link-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; }
-.cb-ptc-link-sub { font-size: 13px; font-weight: 300; color: var(--ink-muted); margin-top: 4px; }
-.cb-ptc-arrow { font-size: 20px; color: var(--gold); }
+.cb-ptc-link:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(15,13,10,0.06), var(--shadow-lift); }
+.cb-ptc-link-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500; }
+.cb-ptc-link-sub { font-size: 13px; font-weight: 300; color: var(--ink-muted); margin-top: 5px; }
+.cb-ptc-arrow {
+  display: grid; place-items: center;
+  width: 40px; height: 40px;
+  border-radius: var(--r-pill);
+  background: rgba(15,13,10,0.06);
+  color: var(--gold);
+  font-size: 17px;
+  flex-shrink: 0;
+  transition: transform 0.5s var(--ease), background 0.5s var(--ease), color 0.5s var(--ease);
+}
+.cb-ptc-link:hover .cb-ptc-arrow { transform: translateX(4px); background: var(--ink); color: var(--gold-light); }
 
 /* ── FOOTER ───────────────────────────────────────────── */
-.cb-footer { background: var(--ink); padding: 48px 40px; text-align: center; }
+.cb-footer { background: var(--ink); padding: 72px 40px 56px; text-align: center; }
 .cb-footer-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 300;
   color: var(--cream);
   letter-spacing: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .cb-footer-tag {
   font-size: 12px;
   font-weight: 300;
-  color: rgba(250,250,247,0.4);
+  color: rgba(253,251,247,0.42);
   letter-spacing: 1px;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
-.cb-footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+.cb-footer-links { display: flex; justify-content: center; gap: 36px; margin-bottom: 28px; }
 .cb-footer-links a {
   font-size: 12px;
-  font-weight: 300;
-  color: rgba(250,250,247,0.5) !important;
-  text-decoration: none !important;
+  font-weight: 400;
+  color: rgba(253,251,247,0.55);
+  text-decoration: none;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: color 0.2s ease;
+  transition: color 0.4s var(--ease);
 }
-.cb-footer-links a:hover { color: var(--gold-light) !important; }
+.cb-footer-links a:hover { color: var(--gold-light); }
 .cb-footer-copy {
   font-size: 11px;
   font-weight: 300;
-  color: rgba(250,250,247,0.25);
+  color: rgba(253,251,247,0.28);
   line-height: 1.8;
 }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 880px) {
+  .cb-cities { gap: 16px; }
+  .cb-city:nth-child(n) { grid-column: span 12; }
+}
 @media (max-width: 760px) {
-  .cb-header-inner { padding: 14px 24px; }
-  .cb-nav { gap: 18px; }
-  .cb-nav a:not(.cb-nav-cta) { display: none; }
+  .cb-header-inner { padding: 12px 22px; }
+  .cb-nav-links, .cb-nav .cb-btn { display: none; }
+  .cb-burger { display: block; }
 }
 @media (max-width: 640px) {
-  .cb-hero { padding: 60px 24px 48px; }
-  .cb-reframe { padding: 60px 24px; }
-  .cb-platform { padding: 60px 24px; }
-  .cb-now { padding: 60px 24px; }
-  .cb-cities { grid-template-columns: 1fr; }
-  .cb-assessment-card { padding: 32px 24px; }
-  .cb-footer { padding: 40px 24px; }
-  .cb-footer-links { flex-wrap: wrap; gap: 20px; }
+  .cb-hero { padding: 72px 24px 60px; }
+  .cb-reframe { padding: 90px 24px; }
+  .cb-platform { padding: 90px 24px; }
+  .cb-now { padding: 90px 24px; }
+  .cb-bezel { padding: 6px; }
+  .cb-assessment-card { padding: 36px 26px; }
+  .cb-ptc-link { padding: 22px; }
+  .cb-footer { padding: 56px 24px 44px; }
+  .cb-footer-links { flex-wrap: wrap; gap: 22px; }
 }
 </style>
 </head>
 <body>
 
 <div class="cb-page">
+  <div class="cb-grain" aria-hidden="true"></div>
 
   <!-- ══ HEADER ════════════════════════════════════════════ -->
   <header class="cb-header">
@@ -388,19 +590,35 @@ html, body { margin: 0; padding: 0; }
         </span>
       </a>
       <nav class="cb-nav" aria-label="Primary">
-        <a href="#cb-platform">The Framework</a>
-        <a href="#cb-now">Assessments</a>
-        <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
-        <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-nav-cta">Take the Assessment</a>
+        <div class="cb-nav-links">
+          <a href="#cb-platform">The Framework</a>
+          <a href="#cb-now">Assessments</a>
+          <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
+        </div>
+        <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn">
+          <span>Take the Assessment</span>
+          <span class="cb-btn-icon" aria-hidden="true">→</span>
+        </a>
+        <button class="cb-burger" id="cbBurger" aria-label="Open menu" aria-expanded="false" aria-controls="cbMobileMenu">
+          <span></span><span></span>
+        </button>
       </nav>
     </div>
   </header>
 
+  <!-- Mobile overlay menu -->
+  <nav class="cb-mobile-menu" id="cbMobileMenu" aria-label="Mobile">
+    <a href="#cb-platform">The Framework</a>
+    <a href="#cb-now">Assessments</a>
+    <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
+    <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/">Take the Assessment</a>
+  </nav>
+
   <!-- ══ HERO ══════════════════════════════════════════════ -->
   <section class="cb-hero">
-    <div class="cb-hero-eyebrow">Cognition Blocks Intelligence Framework</div>
+    <span class="cb-eyebrow cb-hero-eyebrow reveal">Cognition Blocks Intelligence Framework</span>
 
-    <div class="cb-hero-story">
+    <div class="cb-hero-story reveal" style="--rd:0.08s">
       Logan was seven years old and about to be held back for the second time.<br><br>
       His teachers had tried everything. Two years of intervention. Nothing worked.<br><br>
       His father asked for <em>one month.</em><br><br>
@@ -408,15 +626,16 @@ html, body { margin: 0; padding: 0; }
       <strong>because the instruction finally matched how his brain actually works.</strong>
     </div>
 
-    <div class="cb-divider"></div>
+    <div class="cb-divider reveal" style="--rd:0.14s"></div>
 
-    <p class="cb-hero-body">
+    <p class="cb-hero-body reveal" style="--rd:0.18s">
       That's what this framework does.
     </p>
 
-    <div class="cb-cta-block">
-      <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn-primary">
-        Discover how your brain works →
+    <div class="cb-cta-block reveal" style="--rd:0.24s">
+      <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn">
+        <span>Discover how your brain works</span>
+        <span class="cb-btn-icon" aria-hidden="true">→</span>
       </a>
       <div class="cb-cta-meta">
         5 minutes &nbsp;·&nbsp; 15 questions &nbsp;·&nbsp; Free results
@@ -427,13 +646,13 @@ html, body { margin: 0; padding: 0; }
   <!-- ══ REFRAME ════════════════════════════════════════════ -->
   <section class="cb-reframe">
     <div class="cb-reframe-inner">
-      <div class="cb-reframe-label">The real explanation</div>
-      <div class="cb-reframe-text">
+      <span class="cb-eyebrow cb-reframe-label reveal">The real explanation</span>
+      <div class="cb-reframe-text reveal" style="--rd:0.08s">
         Focus. Effort. Attitude.<br><br>
         All valuable. None of them explain why the same person can be
         extraordinary at one thing and inexplicably stuck at another.
       </div>
-      <div class="cb-reframe-close">
+      <div class="cb-reframe-close reveal" style="--rd:0.16s">
         What explains it was already there — in the architecture —<br>
         waiting to be discovered.
       </div>
@@ -445,56 +664,58 @@ html, body { margin: 0; padding: 0; }
     <div class="cb-platform-inner">
 
       <div class="cb-platform-header">
-        <div class="cb-platform-eyebrow">What's Coming</div>
-        <div class="cb-platform-title">The Cognition Block</div>
-        <p class="cb-platform-subtitle">
+        <span class="cb-eyebrow reveal">What's Coming</span>
+        <h2 class="cb-platform-title reveal" style="--rd:0.06s">The Cognition Block</h2>
+        <p class="cb-platform-subtitle reveal" style="--rd:0.12s">
           The place where those who care about <strong>mental health</strong> can go —
           professionals, parents, clinicians, and anyone who has ever wondered
           why their mind works the way it does.
         </p>
       </div>
 
-      <img
-        src="https://cognitionblocksllc.com/wp-content/uploads/2026/04/E29B09FA-A629-42D4-B940-D1654D7F7543.png"
-        alt="The Cognition Block — four cities: Architecture, Assessment, Clinical, Relations"
-        class="cb-city-image"
-        loading="lazy"
-      />
+      <div class="cb-bezel reveal">
+        <img
+          src="https://cognitionblocksllc.com/wp-content/uploads/2026/04/E29B09FA-A629-42D4-B940-D1654D7F7543.png"
+          alt="The Cognition Block — four cities: Architecture, Assessment, Clinical, Relations"
+          class="cb-city-image"
+          loading="lazy"
+        />
+      </div>
 
       <div class="cb-cities">
-        <div class="cb-city">
+        <div class="cb-city reveal">
           <div class="cb-city-name">Architecture</div>
-          <div class="cb-city-desc">
+          <p class="cb-city-desc">
             The framework itself. CBI, the Periodic Table of Cognition,
             cognitive gradients, and the oscillatory substrate beneath it all.
-          </div>
+          </p>
           <div class="cb-city-status">Coming 2026</div>
         </div>
 
-        <div class="cb-city">
+        <div class="cb-city is-live reveal" style="--rd:0.08s">
           <div class="cb-city-name">Assessments</div>
-          <div class="cb-city-desc">
+          <p class="cb-city-desc">
             Parser Profile. Human Intelligence Quotient. Alice-Binet Sync.
             Tools that reveal the architecture — not just describe behavior.
-          </div>
-          <div class="cb-city-status live">● Parser Profile live now</div>
+          </p>
+          <div class="cb-city-status live">Parser Profile live now</div>
         </div>
 
-        <div class="cb-city">
+        <div class="cb-city reveal" style="--rd:0.06s">
           <div class="cb-city-name">Clinical</div>
-          <div class="cb-city-desc">
+          <p class="cb-city-desc">
             CogniMap clinical decision support. Block-level profiling
             for clinicians, veterans, and healthcare systems.
-          </div>
+          </p>
           <div class="cb-city-status">Coming 2026</div>
         </div>
 
-        <div class="cb-city">
+        <div class="cb-city reveal" style="--rd:0.12s">
           <div class="cb-city-name">Relations</div>
-          <div class="cb-city-desc">
+          <p class="cb-city-desc">
             Character Development Framework. Relationship and team tools
             built on cognitive architecture, not personality type.
-          </div>
+          </p>
           <div class="cb-city-status">Coming 2026</div>
         </div>
       </div>
@@ -506,33 +727,35 @@ html, body { margin: 0; padding: 0; }
   <section class="cb-now" id="cb-now">
     <div class="cb-now-inner">
 
-      <div class="cb-now-eyebrow">Available Now</div>
-      <div class="cb-now-title">Start with your<br>Parser Profile™</div>
-      <p class="cb-now-body">
+      <span class="cb-eyebrow cb-now-eyebrow reveal">Available Now</span>
+      <h2 class="cb-now-title reveal" style="--rd:0.06s">Start with your<br>Parser Profile™</h2>
+      <p class="cb-now-body reveal" style="--rd:0.12s">
         In 15 questions, discover the cognitive architecture you've been
         using your entire life without knowing it. The full profile names
         what you've always known about yourself — and couldn't explain.
       </p>
 
-      <div class="cb-assessment-card">
-        <div class="cb-assessment-title">Parser Profile™ Assessment</div>
-        <p class="cb-assessment-desc">
-          Fifteen questions. Five minutes. Your cognitive coordinates across
-          three gradient dimensions — and a profile precise enough to feel
-          like someone finally read your mind.
-        </p>
-
-        <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn-primary">
-          Take the assessment →
-        </a>
+      <div class="cb-assessment-bezel reveal">
+        <div class="cb-assessment-card">
+          <h3 class="cb-assessment-title">Parser Profile™ Assessment</h3>
+          <p class="cb-assessment-desc">
+            Fifteen questions. Five minutes. Your cognitive coordinates across
+            three gradient dimensions — and a profile precise enough to feel
+            like someone finally read your mind.
+          </p>
+          <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn">
+            <span>Take the assessment</span>
+            <span class="cb-btn-icon" aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
 
-      <a href="https://cbi-ptc-production.up.railway.app/" class="cb-ptc-link">
+      <a href="https://cbi-ptc-production.up.railway.app/" class="cb-ptc-link reveal" style="--rd:0.06s">
         <div>
           <div class="cb-ptc-link-text">Periodic Table of Cognition</div>
           <div class="cb-ptc-link-sub">107 brain locations · 8 cognitive blocks · Live now</div>
         </div>
-        <div class="cb-ptc-arrow">→</div>
+        <span class="cb-ptc-arrow" aria-hidden="true">→</span>
       </a>
 
     </div>
@@ -544,19 +767,52 @@ html, body { margin: 0; padding: 0; }
     <div class="cb-footer-tag">
       Developed by J.D. Mercer &nbsp;·&nbsp; U.S. Copyright TXu 2-497-721 &nbsp;·&nbsp; CogniMap™ Patent App #63/968,676
     </div>
-
     <div class="cb-footer-links">
       <a href="https://cognitionblocksllc.com/privacy">Privacy</a>
       <a href="https://cognitionblocksllc.com/terms">Terms</a>
       <a href="https://cognitionblocksllc.com/contact">Contact</a>
     </div>
-
     <div class="cb-footer-copy">
       © 2025–2026 Cognition Blocks LLC. All rights reserved.
     </div>
   </footer>
 
 </div>
+
+<script>
+  // Scroll reveal — transform/opacity only, respects reduced motion
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.classList.add('is-visible'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add('is-visible');
+            io.unobserve(en.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    }
+
+    // Mobile menu
+    var burger = document.getElementById('cbBurger');
+    var menu = document.getElementById('cbMobileMenu');
+    function close() {
+      document.body.classList.remove('cb-menu-open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    burger.addEventListener('click', function () {
+      var open = document.body.classList.toggle('cb-menu-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+</script>
 
 </body>
 </html>
