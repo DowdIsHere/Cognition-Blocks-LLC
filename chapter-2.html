@@ -123,6 +123,11 @@ html, body { margin: 0; padding: 0; }
 }
 .cb-stage-missing.show { display: flex; }
 .cb-stage-missing span { border: 1px dashed rgba(212,168,67,0.4); border-radius: var(--r-pill); padding: 10px 20px; }
+.cb-stage-poster {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  z-index: 3; opacity: 1; transition: opacity 0.7s var(--ease);
+}
+.cb-stage-poster.gone { opacity: 0; pointer-events: none; }
 .cb-bigplay {
   position: absolute; inset: 0; z-index: 4; margin: auto;
   width: 84px; height: 84px; border-radius: 50%; border: none; cursor: pointer;
@@ -230,6 +235,7 @@ html, body { margin: 0; padding: 0; }
         <img class="cb-stage-img" id="imgA" alt="" />
         <img class="cb-stage-img" id="imgB" alt="" />
         <div class="cb-stage-missing" id="missing"><span id="missingText">Image coming soon</span></div>
+        <img class="cb-stage-poster" id="poster" src="images/title.png" alt="Chapter 2 — The Personal Crisis That Transformed Alfred Binet" />
         <div class="cb-stage-grad"></div>
         <div class="cb-stage-counter"><b id="segNum">01</b> / 07</div>
         <div class="cb-stage-caption">
@@ -278,7 +284,7 @@ html, body { margin: 0; padding: 0; }
 <script>
 (function () {
   var SEG = [
-    { n: 1, t: 0,   title: 'The Crisis & Self-Taught Redirection', desc: 'Young Binet, adrift after medical and legal failure, finds his own path in the library stacks.', img: 'images/image-1.png' },
+    { n: 1, t: 0,   title: 'The Crisis & Self-Taught Redirection', desc: 'Young Binet, adrift after medical and legal failure, finds his own path in the library stacks.', img: 'images/image-1.jpg' },
     { n: 2, t: 68,  title: '“A Fog Over Her Mind”', desc: 'The pivotal home observation that became Binet’s scientific mission — a fog present yet penetrable by light and attention.', img: 'images/image-2.png' },
     { n: 3, t: 112, title: 'Two Sisters, Two Structures of Mind', desc: 'Madeline’s sequential structure beside Alice’s introspective responsiveness — same household, different cognitive architectures.', img: 'images/image-3.png' },
     { n: 4, t: 152, title: 'Family Strain & Protest Against Pessimism', desc: 'A father who watched his own daughter misread now confronts a system that sorts children early and rarely revises its judgments.', img: 'images/image-4.png' },
@@ -292,9 +298,16 @@ html, body { margin: 0; padding: 0; }
   var audio = $('audio'), stage = $('stage');
   var imgA = $('imgA'), imgB = $('imgB'), missing = $('missing'), missingText = $('missingText');
   var segNum = $('segNum'), capKicker = $('capKicker'), capTitle = $('capTitle'), capDesc = $('capDesc');
-  var bigPlay = $('bigPlay'), playPause = $('playPause');
+  var bigPlay = $('bigPlay'), playPause = $('playPause'), poster = $('poster');
   var curEl = $('cur'), durEl = $('dur'), track = $('track'), fill = $('fill'), knob = $('knob'), ticks = $('ticks');
-  var current = -1, frontA = true;
+  var current = -1, frontA = true, started = false;
+
+  function startIfNeeded() {
+    if (started) return;
+    started = true;
+    poster.classList.add('gone');
+    render(current);
+  }
 
   function fmt(s) { s = Math.max(0, Math.floor(s || 0)); var m = Math.floor(s / 60); var ss = s % 60; return m + ':' + (ss < 10 ? '0' : '') + ss; }
   function endTime() { return (audio.duration && isFinite(audio.duration)) ? audio.duration : FALLBACK_END; }
@@ -361,7 +374,7 @@ html, body { margin: 0; padding: 0; }
   function toggle() { if (audio.paused) audio.play(); else audio.pause(); }
   bigPlay.addEventListener('click', toggle);
   playPause.addEventListener('click', toggle);
-  audio.addEventListener('play', function () { setPlayIcons(true); });
+  audio.addEventListener('play', function () { setPlayIcons(true); startIfNeeded(); });
   audio.addEventListener('pause', function () { setPlayIcons(false); });
   audio.addEventListener('timeupdate', progress);
   audio.addEventListener('loadedmetadata', function () { durEl.textContent = fmt(endTime()); buildTicks(); });
@@ -406,8 +419,8 @@ html, body { margin: 0; padding: 0; }
     list.appendChild(b);
   });
 
-  // Init
-  current = 0; render(); buildTicks();
+  // Init — show the title card as the cover; first play reveals the storyboard.
+  current = 0; buildTicks();
 })();
 </script>
 </body>
