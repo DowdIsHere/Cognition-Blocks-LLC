@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 2 — The Personal Crisis That Transformed Alfred Binet | Cognition Blocks</title>
+<meta name="description" content="Welcome to the Cognition Block. Chapter 2: The Personal Crisis That Transformed Alfred Binet — a narrated storyboard from the CBI Framework." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #0F0D0A;
+  --ink-soft: #2C2A27;
+  --ink-muted: #6B6660;
+  --gold: #B8892A;
+  --gold-light: #D4A843;
+  --cream: #FDFBF7;
+  --cream-warm: #F4F1EA;
+  --card: #FFFEFB;
+  --border: #E7E2D8;
+  --r-card: 28px;
+  --r-inner: 22px;
+  --r-pill: 999px;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --shadow-soft: 0 1px 2px rgba(15,13,10,0.04), 0 18px 40px -22px rgba(15,13,10,0.20);
+  --shadow-lift: 0 2px 4px rgba(15,13,10,0.05), 0 30px 60px -28px rgba(15,13,10,0.28);
+  --maxw: 1080px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body { margin: 0; padding: 0; }
+.cb-page {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Header */
+.cb-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(253,251,247,0.78);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid rgba(231,226,216,0.7);
+}
+.cb-header-inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 14px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.cb-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.cb-logo-img { width: 42px; height: 42px; flex-shrink: 0; display: block; object-fit: contain; border-radius: 10px; }
+.cb-logo-text { display: flex; flex-direction: column; line-height: 1.12; }
+.cb-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+.cb-logo-sub { font-size: 9px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
+.cb-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none; transition: color 0.4s var(--ease);
+}
+.cb-back:hover { color: var(--gold); }
+
+/* Intro */
+.cb-intro { max-width: 760px; margin: 0 auto; padding: 80px 40px 36px; text-align: center; }
+.cb-eyebrow {
+  display: inline-block; font-size: 10.5px; font-weight: 500; letter-spacing: 2.2px;
+  text-transform: uppercase; color: var(--gold);
+  border: 1px solid rgba(184,137,42,0.32); border-radius: var(--r-pill); padding: 6px 14px; margin-bottom: 26px;
+}
+.cb-intro-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(32px, 4.6vw, 56px); line-height: 1.15; margin: 0 0 24px;
+}
+.cb-intro-lede {
+  font-size: 16px; font-weight: 300; line-height: 1.8; color: var(--ink-soft);
+  max-width: 640px; margin: 0 auto 14px;
+}
+.cb-intro-welcome {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 22px; color: var(--gold); margin-top: 8px;
+}
+
+/* Player */
+.cb-player { max-width: 980px; margin: 0 auto; padding: 24px 40px 40px; }
+.cb-stage-bezel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(231,226,216,0.5));
+  box-shadow: 0 0 0 1px rgba(15,13,10,0.05);
+  padding: 8px; border-radius: var(--r-card);
+}
+.cb-stage {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: var(--r-inner); overflow: hidden; background: #0B0A08;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
+}
+.cb-stage-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0;
+  transition: opacity 0.7s var(--ease);
+}
+.cb-stage-img.show { opacity: 1; }
+.cb-stage.kb .cb-stage-img.show { animation: kb 26s ease-out forwards; }
+@keyframes kb { from { transform: scale(1.001); } to { transform: scale(1.09); } }
+.cb-stage-grad {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(11,10,8,0.20) 0%, rgba(11,10,8,0) 28%, rgba(11,10,8,0) 52%, rgba(11,10,8,0.82) 100%);
+}
+.cb-stage-counter {
+  position: absolute; top: 18px; right: 22px; z-index: 3;
+  font-size: 12px; font-weight: 500; letter-spacing: 2px; color: rgba(253,251,247,0.85);
+}
+.cb-stage-counter b { color: var(--gold-light); font-weight: 600; }
+.cb-stage-caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 28px 32px; }
+.cb-cap-kicker { font-size: 10.5px; font-weight: 500; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; }
+.cb-cap-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3vw, 32px); font-weight: 500; color: var(--cream); line-height: 1.25; margin-bottom: 8px; }
+.cb-cap-desc { font-size: 14px; font-weight: 300; line-height: 1.6; color: rgba(253,251,247,0.78); max-width: 640px; }
+.cb-stage-missing {
+  position: absolute; inset: 0; z-index: 2; display: none;
+  align-items: center; justify-content: center; text-align: center;
+  background: radial-gradient(ellipse at center, #1a1813, #0B0A08);
+  color: rgba(253,251,247,0.5); font-size: 13px; letter-spacing: 1px;
+}
+.cb-stage-missing.show { display: flex; }
+.cb-stage-missing span { border: 1px dashed rgba(212,168,67,0.4); border-radius: var(--r-pill); padding: 10px 20px; }
+.cb-bigplay {
+  position: absolute; inset: 0; z-index: 4; margin: auto;
+  width: 84px; height: 84px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(253,251,247,0.92); color: var(--ink); font-size: 26px;
+  display: grid; place-items: center; transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), background 0.5s var(--ease);
+  box-shadow: 0 20px 50px -16px rgba(0,0,0,0.6);
+}
+.cb-bigplay:hover { transform: scale(1.06); background: var(--gold); color: var(--cream); }
+.cb-bigplay.hidden { opacity: 0; pointer-events: none; transform: scale(0.7); }
+
+/* Controls */
+.cb-controls { display: flex; align-items: center; gap: 18px; margin-top: 22px; }
+.cb-pp {
+  flex-shrink: 0; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+  border: 1px solid var(--ink); background: var(--ink); color: var(--cream);
+  display: grid; place-items: center; font-size: 16px;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.cb-pp:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-1px); }
+.cb-time { font-size: 12px; font-weight: 500; letter-spacing: 0.5px; color: var(--ink-muted); font-variant-numeric: tabular-nums; min-width: 92px; }
+.cb-track { position: relative; flex: 1; height: 6px; border-radius: var(--r-pill); background: var(--border); cursor: pointer; }
+.cb-track-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0%; border-radius: var(--r-pill); background: var(--gold); }
+.cb-track-knob { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); transform: translate(-50%, -50%); left: 0%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+.cb-track-ticks { position: absolute; inset: 0; pointer-events: none; }
+.cb-track-ticks i { position: absolute; top: 50%; width: 2px; height: 10px; background: rgba(15,13,10,0.22); transform: translate(-50%, -50%); }
+
+/* Chapter list */
+.cb-chapters { max-width: 980px; margin: 0 auto; padding: 8px 40px 120px; }
+.cb-chapters-head { font-size: 11px; font-weight: 500; letter-spacing: 2.6px; text-transform: uppercase; color: var(--ink-muted); margin: 40px 0 18px; }
+.cb-chapter {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 18px;
+  width: 100%; text-align: left; cursor: pointer;
+  background: var(--card); border: none; box-shadow: 0 0 0 1px rgba(15,13,10,0.05);
+  border-radius: var(--r-sm, 16px); padding: 18px 22px; margin-bottom: 10px;
+  transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), background 0.5s var(--ease);
+  font-family: inherit;
+}
+.cb-chapter:hover { transform: translateX(4px); box-shadow: 0 0 0 1px rgba(15,13,10,0.06), var(--shadow-soft); }
+.cb-chapter.active { background: var(--ink); box-shadow: 0 0 0 1px rgba(15,13,10,0.5), var(--shadow-lift); }
+.cb-ch-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; color: var(--gold); }
+.cb-chapter.active .cb-ch-num { color: var(--gold-light); }
+.cb-ch-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--ink-soft); line-height: 1.3; }
+.cb-chapter.active .cb-ch-title { color: var(--cream); }
+.cb-ch-time { font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.cb-chapter.active .cb-ch-time { color: rgba(253,251,247,0.6); }
+
+/* Footer */
+.cb-footer { background: var(--ink); padding: 64px 40px 52px; text-align: center; }
+.cb-footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--cream); letter-spacing: 2px; margin-bottom: 10px; }
+.cb-footer-tag { font-size: 12px; font-weight: 300; color: rgba(253,251,247,0.42); letter-spacing: 1px; margin-bottom: 30px; }
+.cb-footer-links { display: flex; justify-content: center; gap: 36px; margin-bottom: 26px; }
+.cb-footer-links a { font-size: 12px; color: rgba(253,251,247,0.55); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.4s var(--ease); }
+.cb-footer-links a:hover { color: var(--gold-light); }
+.cb-footer-copy { font-size: 11px; font-weight: 300; color: rgba(253,251,247,0.28); line-height: 1.8; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .cb-stage.kb .cb-stage-img.show { animation: none; }
+  .cb-stage-img { transition: none; }
+}
+@media (max-width: 640px) {
+  .cb-header-inner { padding: 12px 22px; }
+  .cb-logo-sub { display: none; }
+  .cb-intro { padding: 56px 24px 28px; }
+  .cb-player { padding: 16px 18px 28px; }
+  .cb-chapters { padding: 8px 18px 80px; }
+  .cb-stage-caption { padding: 20px 20px; }
+  .cb-cap-desc { display: none; }
+  .cb-chapter { grid-template-columns: 36px 1fr auto; padding: 14px 16px; gap: 12px; }
+  .cb-footer { padding: 52px 24px 40px; }
+  .cb-footer-links { flex-wrap: wrap; gap: 20px; }
+}
+</style>
+</head>
+<body>
+<div class="cb-page">
+
+  <header class="cb-header">
+    <div class="cb-header-inner">
+      <a href="index.html" class="cb-logo" aria-label="Cognition Blocks LLC — home">
+        <img src="assets/cbi-logo.png" alt="CBI — Cognition Blocks Intelligence" class="cb-logo-img" />
+        <span class="cb-logo-text">
+          <span class="cb-logo-name">Cognition Blocks</span>
+          <span class="cb-logo-sub">CBI Framework</span>
+        </span>
+      </a>
+      <a href="index.html" class="cb-back">← Back to home</a>
+    </div>
+  </header>
+
+  <section class="cb-intro">
+    <span class="cb-eyebrow">The Cognition Block · Chapter 2</span>
+    <h1 class="cb-intro-title">The Personal Crisis That<br>Transformed Alfred Binet</h1>
+    <p class="cb-intro-lede">
+      JD Mercer is not the first parent to advocate and seek a method fitting for their child.
+      His commitment to be one of the last is shared by many — dating to the ancestor of modern
+      intelligence development, Alfred Binet.
+    </p>
+    <div class="cb-intro-welcome">Welcome to the Cognition Block.</div>
+  </section>
+
+  <section class="cb-player">
+    <div class="cb-stage-bezel">
+      <div class="cb-stage" id="stage">
+        <img class="cb-stage-img" id="imgA" alt="" />
+        <img class="cb-stage-img" id="imgB" alt="" />
+        <div class="cb-stage-missing" id="missing"><span id="missingText">Image coming soon</span></div>
+        <div class="cb-stage-grad"></div>
+        <div class="cb-stage-counter"><b id="segNum">01</b> / 07</div>
+        <div class="cb-stage-caption">
+          <div class="cb-cap-kicker" id="capKicker">Image 1 · 0:00</div>
+          <div class="cb-cap-title" id="capTitle">The Crisis &amp; Self-Taught Redirection</div>
+          <div class="cb-cap-desc" id="capDesc">Young Binet, adrift after medical and legal failure, finds his own path in the library stacks.</div>
+        </div>
+        <button class="cb-bigplay" id="bigPlay" aria-label="Play narration">▶</button>
+      </div>
+    </div>
+
+    <div class="cb-controls">
+      <button class="cb-pp" id="playPause" aria-label="Play">▶</button>
+      <div class="cb-time"><span id="cur">0:00</span> / <span id="dur">6:13</span></div>
+      <div class="cb-track" id="track" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+        <div class="cb-track-ticks" id="ticks"></div>
+        <div class="cb-track-fill" id="fill"></div>
+        <div class="cb-track-knob" id="knob"></div>
+      </div>
+    </div>
+
+    <audio id="audio" preload="metadata" src="images/CBI_Chapter_2.m4a"></audio>
+  </section>
+
+  <section class="cb-chapters">
+    <div class="cb-chapters-head">Chapters</div>
+    <div id="chapterList"></div>
+  </section>
+
+  <footer class="cb-footer">
+    <div class="cb-footer-logo">COGNITION BLOCKS LLC</div>
+    <div class="cb-footer-tag">
+      Developed by J.D. Mercer &nbsp;·&nbsp; U.S. Copyright TXu 2-497-721 &nbsp;·&nbsp; CogniMap™ Patent App #63/968,676
+    </div>
+    <div class="cb-footer-links">
+      <a href="index.html">Home</a>
+      <a href="https://cognitionblocksllc.com/privacy">Privacy</a>
+      <a href="https://cognitionblocksllc.com/terms">Terms</a>
+      <a href="https://cognitionblocksllc.com/contact">Contact</a>
+    </div>
+    <div class="cb-footer-copy">© 2025–2026 Cognition Blocks LLC. All rights reserved.</div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var SEG = [
+    { n: 1, t: 0,   title: 'The Crisis & Self-Taught Redirection', desc: 'Young Binet, adrift after medical and legal failure, finds his own path in the library stacks.', img: 'images/image-1.png' },
+    { n: 2, t: 68,  title: '“A Fog Over Her Mind”', desc: 'The pivotal home observation that became Binet’s scientific mission — a fog present yet penetrable by light and attention.', img: 'images/image-2.png' },
+    { n: 3, t: 112, title: 'Two Sisters, Two Structures of Mind', desc: 'Madeline’s sequential structure beside Alice’s introspective responsiveness — same household, different cognitive architectures.', img: 'images/image-3.png' },
+    { n: 4, t: 152, title: 'Family Strain & Protest Against Pessimism', desc: 'A father who watched his own daughter misread now confronts a system that sorts children early and rarely revises its judgments.', img: 'images/image-4.png' },
+    { n: 5, t: 210, title: 'Public Error & Hard-Won Humility', desc: 'The Salpêtrière years and the public admission of being wrong that deepened Binet’s sensitivity to how easily anyone can be misread.', img: 'images/image-5.png' },
+    { n: 6, t: 261, title: 'The Scale as a Starting Point, Not a Verdict', desc: 'Binet and Simon create tasks to identify where a child currently is — to guide what comes next, never to declare what they will always be.', img: 'images/image-6.png' },
+    { n: 7, t: 325, title: 'The Fog Was in the Instrument', desc: 'Binet’s legacy: what he built was never meant to define limits. It was designed to find where to start — and to insist that starting is always possible.', img: 'images/image-7.png' }
+  ];
+  var FALLBACK_END = 373; // 6:13
+
+  var $ = function (id) { return document.getElementById(id); };
+  var audio = $('audio'), stage = $('stage');
+  var imgA = $('imgA'), imgB = $('imgB'), missing = $('missing'), missingText = $('missingText');
+  var segNum = $('segNum'), capKicker = $('capKicker'), capTitle = $('capTitle'), capDesc = $('capDesc');
+  var bigPlay = $('bigPlay'), playPause = $('playPause');
+  var curEl = $('cur'), durEl = $('dur'), track = $('track'), fill = $('fill'), knob = $('knob'), ticks = $('ticks');
+  var current = -1, frontA = true;
+
+  function fmt(s) { s = Math.max(0, Math.floor(s || 0)); var m = Math.floor(s / 60); var ss = s % 60; return m + ':' + (ss < 10 ? '0' : '') + ss; }
+  function endTime() { return (audio.duration && isFinite(audio.duration)) ? audio.duration : FALLBACK_END; }
+
+  // Preflight image availability so we can show graceful placeholders.
+  SEG.forEach(function (s) {
+    var probe = new Image();
+    probe.onload = function () { s.ok = true; if (current === SEG.indexOf(s)) render(); };
+    probe.onerror = function () { s.ok = false; if (current === SEG.indexOf(s)) render(); };
+    probe.src = s.img;
+  });
+
+  function segIndexAt(t) {
+    var idx = 0;
+    for (var i = 0; i < SEG.length; i++) { if (t >= SEG[i].t) idx = i; }
+    return idx;
+  }
+
+  function render() {
+    var s = SEG[current];
+    segNum.textContent = (s.n < 10 ? '0' : '') + s.n;
+    capKicker.textContent = 'Image ' + s.n + ' · ' + fmt(s.t);
+    capTitle.innerHTML = s.title;
+    capDesc.textContent = s.desc;
+
+    if (s.ok === false) {
+      missingText.textContent = 'Image ' + s.n + ' — upload images/image-' + s.n + '.png';
+      missing.classList.add('show');
+      imgA.classList.remove('show'); imgB.classList.remove('show');
+    } else {
+      missing.classList.remove('show');
+      var front = frontA ? imgB : imgA;   // the one to fade IN
+      var back  = frontA ? imgA : imgB;
+      front.src = s.img;
+      front.classList.add('show');
+      back.classList.remove('show');
+      frontA = !frontA;
+      // restart Ken Burns
+      stage.classList.remove('kb'); void stage.offsetWidth; stage.classList.add('kb');
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.cb-chapter'), function (el, i) {
+      el.classList.toggle('active', i === current);
+    });
+  }
+
+  function goTo(i) { if (i !== current) { current = i; render(); } }
+
+  function progress() {
+    var d = endTime(), c = audio.currentTime || 0;
+    var pct = d ? (c / d) * 100 : 0;
+    fill.style.width = pct + '%'; knob.style.left = pct + '%';
+    track.setAttribute('aria-valuenow', Math.round(pct));
+    curEl.textContent = fmt(c);
+    goTo(segIndexAt(c));
+  }
+
+  function setPlayIcons(playing) {
+    var icon = playing ? '❚❚' : '▶';
+    playPause.textContent = icon; playPause.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+    bigPlay.classList.toggle('hidden', playing);
+  }
+
+  function toggle() { if (audio.paused) audio.play(); else audio.pause(); }
+  bigPlay.addEventListener('click', toggle);
+  playPause.addEventListener('click', toggle);
+  audio.addEventListener('play', function () { setPlayIcons(true); });
+  audio.addEventListener('pause', function () { setPlayIcons(false); });
+  audio.addEventListener('timeupdate', progress);
+  audio.addEventListener('loadedmetadata', function () { durEl.textContent = fmt(endTime()); buildTicks(); });
+  audio.addEventListener('ended', function () { setPlayIcons(false); });
+
+  function seekFromClientX(x) {
+    var r = track.getBoundingClientRect();
+    var pct = Math.min(1, Math.max(0, (x - r.left) / r.width));
+    audio.currentTime = pct * endTime();
+    progress();
+  }
+  var dragging = false;
+  track.addEventListener('mousedown', function (e) { dragging = true; seekFromClientX(e.clientX); });
+  window.addEventListener('mousemove', function (e) { if (dragging) seekFromClientX(e.clientX); });
+  window.addEventListener('mouseup', function () { dragging = false; });
+  track.addEventListener('touchstart', function (e) { seekFromClientX(e.touches[0].clientX); }, { passive: true });
+  track.addEventListener('touchmove', function (e) { seekFromClientX(e.touches[0].clientX); }, { passive: true });
+  track.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { audio.currentTime = Math.min(endTime(), audio.currentTime + 5); progress(); }
+    if (e.key === 'ArrowLeft') { audio.currentTime = Math.max(0, audio.currentTime - 5); progress(); }
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); }
+  });
+
+  function buildTicks() {
+    ticks.innerHTML = '';
+    var d = endTime();
+    SEG.forEach(function (s) {
+      if (s.t <= 0) return;
+      var i = document.createElement('i'); i.style.left = ((s.t / d) * 100) + '%'; ticks.appendChild(i);
+    });
+  }
+
+  // Build chapter list
+  var list = $('chapterList');
+  SEG.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.className = 'cb-chapter';
+    b.innerHTML = '<span class="cb-ch-num">' + (s.n < 10 ? '0' : '') + s.n + '</span>' +
+                  '<span class="cb-ch-title">' + s.title + '</span>' +
+                  '<span class="cb-ch-time">' + fmt(s.t) + '</span>';
+    b.addEventListener('click', function () { audio.currentTime = s.t + 0.05; goTo(i); progress(); if (audio.paused) audio.play(); });
+    list.appendChild(b);
+  });
+
+  // Init
+  current = 0; render(); buildTicks();
+})();
+</script>
+</body>
+</html>
