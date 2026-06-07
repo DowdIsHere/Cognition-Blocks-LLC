@@ -253,6 +253,34 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
 .cb-tile--story .cb-tile-go .arc { background: rgba(253,251,247,0.16); color: var(--cream); }
 .cb-tile--story:hover .cb-tile-go .arc { transform: translate(3px,-3px) scale(1.06); background: var(--gold); color: var(--cream); }
 
+/* Inline narrated player (compact) */
+.cb-sp { cursor: pointer; }
+.cb-sp-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 1; transition: opacity 0.7s var(--ease); }
+.cb-sp-img.show { opacity: 1; }
+.cb-sp.kb .cb-sp-img.show { animation: cbkb 24s ease-out forwards; }
+@keyframes cbkb { from { transform: scale(1.001); } to { transform: scale(1.08); } }
+.cb-sp-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 1; transition: opacity 0.6s var(--ease); }
+.cb-sp-poster.gone { opacity: 0; }
+.cb-tile--story .cb-story-grad { z-index: 3; }
+.cb-sp-top { position: absolute; top: 0; left: 0; right: 0; z-index: 4; display: flex; justify-content: flex-end; padding: 16px 18px; }
+.cb-sp-counter { font-size: 11px; font-weight: 500; letter-spacing: 2px; color: rgba(253,251,247,0.85); opacity: 0; transition: opacity 0.4s var(--ease); }
+.cb-sp.playing .cb-sp-counter { opacity: 1; }
+.cb-sp-counter b { color: var(--gold-light); font-weight: 600; }
+.cb-tile--story .cb-story-body { z-index: 4; }
+.cb-sp-title { font-size: clamp(20px, 2.4vw, 24px) !important; }
+.cb-sp-play {
+  position: absolute; inset: 0; margin: auto; width: 62px; height: 62px; border-radius: 50%;
+  border: none; cursor: pointer; background: rgba(253,251,247,0.94); color: var(--ink);
+  font-size: 19px; display: grid; place-items: center; z-index: 5;
+  box-shadow: 0 16px 40px -14px rgba(0,0,0,0.6);
+  transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), background 0.5s var(--ease), color 0.5s var(--ease);
+}
+.cb-sp-play:hover { background: var(--gold); color: var(--cream); transform: scale(1.07); }
+.cb-sp.playing .cb-sp-play { opacity: 0; pointer-events: none; transform: scale(0.7); }
+.cb-sp-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; z-index: 5; background: rgba(253,251,247,0.18); cursor: pointer; }
+.cb-sp-fill { height: 100%; width: 0%; background: var(--gold); }
+@media (prefers-reduced-motion: reduce) { .cb-sp.kb .cb-sp-img.show { animation: none; } }
+
 /* ── FOOTER ───────────────────────────────────────────── */
 .cb-footer { background: var(--ink); padding: 72px 40px 56px; text-align: center; }
 .cb-footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--cream); letter-spacing: 2px; margin-bottom: 10px; }
@@ -379,18 +407,23 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
         </div>
       </div>
 
-      <!-- The Story (Binet video) -->
-      <a href="chapter-2.html" class="cb-tile cb-tile--story reveal" style="--rd:0.06s">
-        <div class="cb-story-inner">
-          <img src="images/image-1.jpg" alt="Alfred Binet in the library stacks" loading="lazy" />
+      <!-- The Story (Binet — inline narrated player) -->
+      <div class="cb-tile cb-tile--story reveal" style="--rd:0.06s">
+        <div class="cb-story-inner cb-sp" id="binet">
+          <img class="cb-sp-img" id="spA" alt="" aria-hidden="true" />
+          <img class="cb-sp-img" id="spB" alt="" aria-hidden="true" />
+          <img class="cb-sp-poster" id="spPoster" src="images/title.png" alt="Chapter 2 — The Story of Alfred Binet" loading="lazy" />
           <div class="cb-story-grad"></div>
+          <div class="cb-sp-top"><span class="cb-sp-counter"><b id="spNum">01</b> / 07</span></div>
           <div class="cb-story-body">
             <div class="cb-tile-kicker">Chapter 2 · Narrated</div>
-            <h3 class="cb-tile-title">The story of<br>Alfred Binet</h3>
-            <span class="cb-tile-go">Watch the story <span class="arc" aria-hidden="true">→</span></span>
+            <h3 class="cb-tile-title cb-sp-title" id="spTitle">The Story of Alfred Binet</h3>
           </div>
+          <button class="cb-sp-play" id="spPlay" aria-label="Play the story of Alfred Binet"><span aria-hidden="true">▶</span></button>
+          <div class="cb-sp-bar" id="spBar" role="progressbar" aria-label="Story progress"><div class="cb-sp-fill" id="spFill"></div></div>
+          <audio id="spAudio" preload="none" src="images/CBI_Chapter_2.m4a"></audio>
         </div>
-      </a>
+      </div>
 
       <!-- Periodic Table -->
       <a href="https://cbi-ptc-production.up.railway.app/" class="cb-tile cb-tile--ptc reveal" style="--rd:0.1s">
@@ -469,6 +502,57 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
     });
     menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  })();
+
+  // Inline narrated player (Binet, Chapter 2)
+  (function () {
+    var SEG = [
+      { n: 1, t: 0,   title: 'The crisis & redirection',        img: 'images/image-1.jpg' },
+      { n: 2, t: 68,  title: 'A fog over her mind',             img: 'images/image-2.png' },
+      { n: 3, t: 112, title: 'Two sisters, two minds',          img: 'images/image-3.png' },
+      { n: 4, t: 152, title: 'Protest against pessimism',       img: 'images/image-4.png' },
+      { n: 5, t: 210, title: 'Public error, hard-won humility', img: 'images/image-5.png' },
+      { n: 6, t: 261, title: 'The scale as a starting point',   img: 'images/image-6.png' },
+      { n: 7, t: 325, title: 'The fog was in the instrument',   img: 'images/image-7.png' }
+    ];
+    var FALLBACK_END = 373;
+    var stage = document.getElementById('binet');
+    if (!stage) return;
+    var audio = document.getElementById('spAudio');
+    var imgA = document.getElementById('spA'), imgB = document.getElementById('spB'), poster = document.getElementById('spPoster');
+    var num = document.getElementById('spNum'), titleEl = document.getElementById('spTitle');
+    var playBtn = document.getElementById('spPlay'), bar = document.getElementById('spBar'), fill = document.getElementById('spFill');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var current = -1, frontA = true, started = false;
+
+    function endT() { return (audio.duration && isFinite(audio.duration)) ? audio.duration : FALLBACK_END; }
+    function segAt(t) { var i = 0; for (var k = 0; k < SEG.length; k++) { if (t >= SEG[k].t) i = k; } return i; }
+    function render() {
+      var s = SEG[current];
+      num.textContent = (s.n < 10 ? '0' : '') + s.n;
+      titleEl.textContent = s.title;
+      var front = frontA ? imgB : imgA, back = frontA ? imgA : imgB;
+      front.src = s.img; front.classList.add('show'); back.classList.remove('show'); frontA = !frontA;
+      if (!reduce) { stage.classList.remove('kb'); void stage.offsetWidth; stage.classList.add('kb'); }
+    }
+    function startIfNeeded() { if (started) return; started = true; poster.classList.add('gone'); render(); }
+    function toggle() { if (audio.paused) audio.play(); else audio.pause(); }
+
+    playBtn.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+    stage.addEventListener('click', toggle);
+    bar.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var r = bar.getBoundingClientRect();
+      audio.currentTime = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) * endT();
+    });
+    audio.addEventListener('play', function () { stage.classList.add('playing'); startIfNeeded(); });
+    audio.addEventListener('pause', function () { stage.classList.remove('playing'); });
+    audio.addEventListener('ended', function () { stage.classList.remove('playing'); });
+    audio.addEventListener('timeupdate', function () {
+      var d = endT(), c = audio.currentTime || 0;
+      fill.style.width = (d ? c / d * 100 : 0) + '%';
+      var i = segAt(c); if (i !== current) { current = i; render(); }
+    });
   })();
 </script>
 </body>
