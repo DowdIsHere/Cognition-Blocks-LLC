@@ -48,7 +48,7 @@ html, body { margin: 0; padding: 0; }
   position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.cb-page > *:not(.cb-grain) { position: relative; z-index: 2; }
+.cb-page > *:not(.cb-grain):not(.cb-mobile-menu) { position: relative; z-index: 2; }
 
 /* ── REVEAL ───────────────────────────────────────────── */
 .reveal {
@@ -316,7 +316,7 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
   <header class="cb-header">
     <div class="cb-header-inner">
       <a href="https://cognitionblocksllc.com" class="cb-logo" aria-label="Cognition Blocks LLC — home">
-        <img src="assets/cbi-logo.png" alt="CBI — Cognition Blocks Intelligence" class="cb-logo-img" />
+        <img src="images/cbi-logo.jpg" alt="CBI — Cognition Blocks Intelligence" class="cb-logo-img" />
         <span class="cb-logo-text">
           <span class="cb-logo-name">Cognition Blocks</span>
           <span class="cb-logo-sub">CBI Framework</span>
@@ -324,7 +324,6 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
       </a>
       <nav class="cb-nav" aria-label="Primary">
         <div class="cb-nav-links">
-          <a href="chapter-2.html">The Story</a>
           <a href="#cb-dest">Parser</a>
           <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
           <a href="https://ddcot-production.up.railway.app/">The Reader</a>
@@ -341,7 +340,6 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
   </header>
 
   <nav class="cb-mobile-menu" id="cbMobileMenu" aria-label="Mobile">
-    <a href="chapter-2.html">The Story</a>
     <a href="#cb-dest">Parser</a>
     <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
     <a href="https://ddcot-production.up.railway.app/">The Reader</a>
@@ -455,7 +453,6 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
       Developed by J.D. Mercer &nbsp;·&nbsp; U.S. Copyright TXu 2-497-721 &nbsp;·&nbsp; CogniMap™ Patent App #63/968,676
     </div>
     <div class="cb-footer-links">
-      <a href="chapter-2.html">The Story</a>
       <a href="https://cognitionblocksllc.com/privacy">Privacy</a>
       <a href="https://cognitionblocksllc.com/terms">Terms</a>
       <a href="https://cognitionblocksllc.com/contact">Contact</a>
