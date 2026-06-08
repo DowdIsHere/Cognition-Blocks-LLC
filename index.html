@@ -11,9 +11,8 @@
 <style>
 /* ============================================================
    COGNITION BLOCKS LLC — HOMEPAGE
-   High-end editorial. Warm cream, off-black ink, single gold accent.
-   Soft-premium remodel: editorial hero, asymmetric bento, double-bezel,
-   magnetic buttons, pointer-glow feature, macro whitespace.
+   Warm cream, off-black ink, single gold accent.
+   Hero (Logan) -> dark assessment section -> light Binet chapter.
    ============================================================ */
 :root {
   --ink: #0F0D0A;
@@ -60,7 +59,6 @@ html, body { margin: 0; padding: 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; filter: none; transition: none; }
-  .cb-feat::before, .kb { animation: none !important; }
 }
 
 /* ── BUTTONS (pill + button-in-button, magnetic) ──────── */
@@ -84,7 +82,7 @@ html, body { margin: 0; padding: 0; }
 .cb-btn-light .cb-btn-icon { background: rgba(15,13,10,0.08); }
 .cb-btn-light:hover { background: var(--gold-light); border-color: var(--gold-light); color: var(--ink); }
 
-/* ── HEADER (static, not sticky) ──────────────────────── */
+/* ── HEADER (static) ──────────────────────────────────── */
 .cb-header { background: var(--cream); border-bottom: 1px solid var(--border); }
 .cb-header-inner {
   max-width: var(--maxw); margin: 0 auto; padding: 16px 40px;
@@ -131,10 +129,7 @@ body.cb-menu-open .cb-mobile-menu { opacity: 1; visibility: visible; }
 .cb-mobile-menu a:hover { color: var(--gold-light); }
 body.cb-menu-open .cb-mobile-menu a { opacity: 1; transform: none; }
 body.cb-menu-open .cb-mobile-menu a:nth-child(1) { transition-delay: 0.12s; }
-body.cb-menu-open .cb-mobile-menu a:nth-child(2) { transition-delay: 0.17s; }
-body.cb-menu-open .cb-mobile-menu a:nth-child(3) { transition-delay: 0.22s; }
-body.cb-menu-open .cb-mobile-menu a:nth-child(4) { transition-delay: 0.27s; }
-body.cb-menu-open .cb-mobile-menu a:nth-child(5) { transition-delay: 0.32s; }
+body.cb-menu-open .cb-mobile-menu a:nth-child(2) { transition-delay: 0.18s; }
 
 /* ── SHARED ───────────────────────────────────────────── */
 .cb-eyebrow {
@@ -146,8 +141,8 @@ body.cb-menu-open .cb-mobile-menu a:nth-child(5) { transition-delay: 0.32s; }
 /* ── HERO (editorial) ─────────────────────────────────── */
 .cb-hero {
   position: relative; max-width: 920px; margin: 0 auto;
-  padding: 120px 40px 100px;
-  display: grid; grid-template-columns: 1fr; gap: 0;
+  padding: 120px 40px 110px;
+  display: grid; grid-template-columns: 1fr;
 }
 .cb-hero::before {
   content: ""; position: absolute; top: 4%; right: -14%;
@@ -161,123 +156,72 @@ body.cb-menu-open .cb-mobile-menu a:nth-child(5) { transition-delay: 0.32s; }
 .cb-hero-story {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(30px, 4.6vw, 50px); font-weight: 300; line-height: 1.36;
-  color: var(--ink); margin: 0 0 44px; max-width: 17ch; letter-spacing: -0.3px;
+  color: var(--ink); margin: 0; letter-spacing: -0.3px;
 }
-.cb-hero-story.wide { max-width: none; }
 .cb-hero-story em { font-style: italic; color: var(--ink-soft); }
 .cb-hero-story strong { font-weight: 600; color: var(--ink); }
-.cb-divider { width: 56px; height: 2px; background: var(--gold); margin: 0 0 36px; }
-.cb-hero-close {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: clamp(22px, 2.6vw, 30px); font-weight: 400; color: var(--gold);
-  margin: 0 0 44px;
+
+/* ── DARK ASSESSMENT SECTION ──────────────────────────── */
+.cb-dark { position: relative; background: var(--ink); padding: 150px 40px; }
+.cb-dark-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+.cb-dark-eyebrow {
+  display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin: 0 0 40px;
 }
-.cb-cta-block { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-.cb-cta-meta { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+.cb-dark-statement {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(28px, 4.2vw, 46px); line-height: 1.4; color: var(--cream); margin: 0 0 34px;
+}
+.cb-dark-body {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(21px, 2.9vw, 30px); line-height: 1.55; color: rgba(253,251,247,0.82);
+  max-width: 36ch; margin: 0 auto 44px;
+}
 
-/* ── DESTINATIONS (bento) ─────────────────────────────── */
-.cb-dest { max-width: var(--maxw); margin: 0 auto; padding: 40px 40px 130px; }
-.cb-dest-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 38px; flex-wrap: wrap; }
-.cb-dest-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 300; line-height: 1.2; margin: 14px 0 0; }
-.cb-dest-note { font-size: 14px; font-weight: 300; color: var(--ink-muted); max-width: 280px; line-height: 1.6; }
-
-.cb-bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-.cb-tile {
-  border-radius: var(--r-card); padding: 8px;
+/* ── LIGHT BINET CHAPTER SECTION ──────────────────────── */
+.cb-binet { background: var(--cream-warm); padding: 130px 40px; }
+.cb-binet-inner { max-width: var(--maxw); margin: 0 auto; }
+.cb-binet-head { text-align: center; max-width: 800px; margin: 0 auto 56px; }
+.cb-binet-head .cb-eyebrow { margin-bottom: 26px; }
+.cb-binet-lead {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(25px, 3.4vw, 40px); line-height: 1.32; letter-spacing: -0.3px;
+  color: var(--ink); margin: 0;
+}
+.cb-binet-lead em { font-style: italic; color: var(--gold); }
+.cb-binet-frame {
   background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(231,226,216,0.5));
   box-shadow: 0 0 0 1px rgba(15,13,10,0.05);
-  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+  padding: 8px; border-radius: var(--r-card); max-width: 920px; margin: 0 auto;
 }
-.cb-tile:hover { transform: translateY(-5px); box-shadow: 0 0 0 1px rgba(15,13,10,0.06), var(--shadow-lift); }
-.cb-tile-inner {
-  height: 100%; border-radius: var(--r-inner); padding: 36px 34px;
-  background: var(--card); box-shadow: inset 0 1px 1px rgba(255,255,255,0.6);
-  display: flex; flex-direction: column;
-}
-.cb-tile-kicker { font-size: 10.5px; font-weight: 500; letter-spacing: 2.4px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-.cb-tile-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0 0 12px; color: var(--ink); }
-.cb-tile-desc { font-size: 14.5px; font-weight: 300; line-height: 1.65; color: var(--ink-soft); margin: 0 0 26px; flex: 1; }
-.cb-tile-go {
-  display: inline-flex; align-items: center; gap: 12px; align-self: flex-start;
-  font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-soft);
-}
-.cb-tile-go .arc {
-  display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--r-pill);
-  background: rgba(15,13,10,0.06); color: var(--gold); font-size: 15px;
-  transition: transform 0.5s var(--ease), background 0.5s var(--ease), color 0.5s var(--ease);
-}
-a.cb-tile { text-decoration: none; }
-a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: var(--ink); color: var(--gold-light); }
 
-/* spans */
-.cb-tile--feat   { grid-column: span 7; }
-.cb-tile--story  { grid-column: span 5; padding: 0; background: none; box-shadow: 0 0 0 1px rgba(15,13,10,0.05); }
-.cb-tile--ptc    { grid-column: span 5; }
-.cb-tile--reader { grid-column: span 7; }
-
-/* Feature (dark, pointer glow) */
-.cb-tile--feat .cb-tile-inner {
-  position: relative; overflow: hidden; background: var(--ink);
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.06); min-height: 320px; justify-content: center;
-}
-.cb-tile--feat .cb-tile-inner::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  background: radial-gradient(440px circle at var(--mx, 70%) var(--my, 18%), rgba(212,168,67,0.20), transparent 60%);
-  transition: opacity 0.5s var(--ease);
-}
-.cb-tile--feat:hover .cb-tile-inner::before { opacity: 1; }
-.cb-tile--feat .cb-tile-kicker { color: var(--gold-light); }
-.cb-tile--feat .cb-tile-title { color: var(--cream); font-size: clamp(28px, 3.2vw, 40px); font-weight: 300; }
-.cb-tile--feat .cb-tile-desc { color: rgba(253,251,247,0.78); max-width: 42ch; }
-.cb-tile--feat .cb-feat-foot { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 4px; }
-.cb-tile--feat .cb-feat-meta { font-size: 12.5px; color: rgba(253,251,247,0.55); }
-
-/* Story (image) */
-.cb-tile--story .cb-story-inner {
-  position: relative; height: 100%; min-height: 320px; border-radius: var(--r-inner);
-  overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end;
-}
-.cb-tile--story img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform 1.2s var(--ease);
-}
-.cb-tile--story:hover img { transform: scale(1.06); }
-.cb-tile--story .cb-story-grad {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(11,10,8,0.10) 0%, rgba(11,10,8,0) 40%, rgba(11,10,8,0.86) 100%);
-}
-.cb-tile--story .cb-story-body { position: relative; padding: 34px; }
-.cb-tile--story .cb-tile-kicker { color: var(--gold-light); }
-.cb-tile--story .cb-tile-title { color: var(--cream); margin-bottom: 16px; }
-.cb-tile--story .cb-tile-go { color: rgba(253,251,247,0.9); }
-.cb-tile--story .cb-tile-go .arc { background: rgba(253,251,247,0.16); color: var(--cream); }
-.cb-tile--story:hover .cb-tile-go .arc { transform: translate(3px,-3px) scale(1.06); background: var(--gold); color: var(--cream); }
-
-/* Inline narrated player (compact) */
-.cb-sp { cursor: pointer; }
+/* Inline narrated player */
+.cb-binet-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+.cb-sp { overflow: hidden; border-radius: var(--r-inner); cursor: pointer; background: #0B0A08; box-shadow: inset 0 1px 1px rgba(255,255,255,0.4); }
 .cb-sp-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; z-index: 1; transition: opacity 0.7s var(--ease); }
 .cb-sp-img.show { opacity: 1; }
-.cb-sp.kb .cb-sp-img.show { animation: cbkb 24s ease-out forwards; }
+.cb-sp.kb .cb-sp-img.show { animation: cbkb 26s ease-out forwards; }
 @keyframes cbkb { from { transform: scale(1.001); } to { transform: scale(1.08); } }
 .cb-sp-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; opacity: 1; transition: opacity 0.6s var(--ease); }
 .cb-sp-poster.gone { opacity: 0; }
-.cb-tile--story .cb-story-grad { z-index: 3; }
-.cb-sp-top { position: absolute; top: 0; left: 0; right: 0; z-index: 4; display: flex; justify-content: flex-end; padding: 16px 18px; }
+.cb-sp-grad { position: absolute; inset: 0; z-index: 3; pointer-events: none; background: linear-gradient(180deg, rgba(11,10,8,0.12) 0%, rgba(11,10,8,0) 38%, rgba(11,10,8,0.86) 100%); }
+.cb-sp-top { position: absolute; top: 0; left: 0; right: 0; z-index: 4; display: flex; justify-content: flex-end; padding: 18px 22px; }
 .cb-sp-counter { font-size: 11px; font-weight: 500; letter-spacing: 2px; color: rgba(253,251,247,0.85); opacity: 0; transition: opacity 0.4s var(--ease); }
 .cb-sp.playing .cb-sp-counter { opacity: 1; }
 .cb-sp-counter b { color: var(--gold-light); font-weight: 600; }
-.cb-tile--story .cb-story-body { z-index: 4; }
-.cb-sp-title { font-size: clamp(20px, 2.4vw, 24px) !important; }
+.cb-sp-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; padding: 32px 36px; }
+.cb-sp-kicker { font-size: 10.5px; font-weight: 500; letter-spacing: 2.4px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; }
+.cb-sp-title { font-family: 'Cormorant Garamond', serif; color: var(--cream); font-weight: 500; line-height: 1.2; margin: 0; font-size: clamp(24px, 3vw, 34px); }
 .cb-sp-play {
-  position: absolute; inset: 0; margin: auto; width: 62px; height: 62px; border-radius: 50%;
+  position: absolute; inset: 0; margin: auto; width: 74px; height: 74px; border-radius: 50%;
   border: none; cursor: pointer; background: rgba(253,251,247,0.94); color: var(--ink);
-  font-size: 19px; display: grid; place-items: center; z-index: 5;
-  box-shadow: 0 16px 40px -14px rgba(0,0,0,0.6);
+  font-size: 22px; display: grid; place-items: center; z-index: 5;
+  box-shadow: 0 18px 44px -14px rgba(0,0,0,0.6);
   transition: transform 0.5s var(--ease), opacity 0.5s var(--ease), background 0.5s var(--ease), color 0.5s var(--ease);
 }
 .cb-sp-play:hover { background: var(--gold); color: var(--cream); transform: scale(1.07); }
 .cb-sp.playing .cb-sp-play { opacity: 0; pointer-events: none; transform: scale(0.7); }
-.cb-sp-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 5px; z-index: 5; background: rgba(253,251,247,0.18); cursor: pointer; }
+.cb-sp-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; z-index: 5; background: rgba(253,251,247,0.18); cursor: pointer; }
 .cb-sp-fill { height: 100%; width: 0%; background: var(--gold); }
 @media (prefers-reduced-motion: reduce) { .cb-sp.kb .cb-sp-img.show { animation: none; } }
 
@@ -291,18 +235,17 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
 .cb-footer-copy { font-size: 11px; font-weight: 300; color: rgba(253,251,247,0.28); line-height: 1.8; }
 
 /* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 900px) {
-  .cb-tile--feat, .cb-tile--story, .cb-tile--ptc, .cb-tile--reader { grid-column: span 12; }
-}
 @media (max-width: 760px) {
   .cb-header-inner { padding: 14px 22px; }
   .cb-nav-links, .cb-nav .cb-btn { display: none; }
   .cb-burger { display: block; }
 }
 @media (max-width: 640px) {
-  .cb-hero { padding: 72px 24px 64px; }
-  .cb-dest { padding: 24px 22px 90px; }
-  .cb-tile-inner { padding: 30px 26px; }
+  .cb-hero { padding: 64px 24px 72px; }
+  .cb-dark { padding: 96px 24px; }
+  .cb-binet { padding: 84px 22px; }
+  .cb-binet-frame { padding: 6px; }
+  .cb-sp-body { padding: 22px 22px; }
   .cb-footer { padding: 56px 24px 44px; }
   .cb-footer-links { flex-wrap: wrap; gap: 22px; }
 }
@@ -324,9 +267,8 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
       </a>
       <nav class="cb-nav" aria-label="Primary">
         <div class="cb-nav-links">
-          <a href="#cb-dest">Parser</a>
-          <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
-          <a href="https://ddcot-production.up.railway.app/">The Reader</a>
+          <a href="#cb-assess">The Assessment</a>
+          <a href="#cb-binet">Chapter 2</a>
         </div>
         <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn">
           <span>Take the Assessment</span>
@@ -340,10 +282,8 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
   </header>
 
   <nav class="cb-mobile-menu" id="cbMobileMenu" aria-label="Mobile">
-    <a href="#cb-dest">Parser</a>
-    <a href="https://cbi-ptc-production.up.railway.app/">Periodic Table</a>
-    <a href="https://ddcot-production.up.railway.app/">The Reader</a>
-    <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/">Take the Assessment</a>
+    <a href="#cb-assess">The Assessment</a>
+    <a href="#cb-binet">Chapter 2</a>
   </nav>
 
   <!-- ══ HERO ══════════════════════════════════════════════ -->
@@ -352,97 +292,62 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
       <span class="line"></span>
       <span class="txt">A true story</span>
     </div>
-
-    <div class="cb-hero-story wide reveal" style="--rd:0.06s">
+    <div class="cb-hero-story reveal" style="--rd:0.06s">
       Logan was seven years old and about to be held back for the second time.<br><br>
       His teachers had tried everything. Two years of intervention. Nothing worked.<br><br>
       His father asked for <em>one month.</em><br><br>
       In 30 days, Logan was reading — not because anything about him changed —
       <strong>because the instruction finally matched how his brain actually works.</strong>
     </div>
+  </section>
 
-    <div class="cb-divider reveal" style="--rd:0.12s"></div>
-    <p class="cb-hero-close reveal" style="--rd:0.16s">That's what this framework does.</p>
-
-    <div class="cb-cta-block reveal" style="--rd:0.22s">
-      <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn">
-        <span>Discover how your brain works</span>
-        <span class="cb-btn-icon" aria-hidden="true">→</span>
-      </a>
-      <div class="cb-cta-meta">5 minutes &nbsp;·&nbsp; 15 questions &nbsp;·&nbsp; Free results</div>
+  <!-- ══ DARK · ASSESSMENT ═════════════════════════════════ -->
+  <section class="cb-dark" id="cb-assess">
+    <div class="cb-dark-inner">
+      <span class="cb-dark-eyebrow reveal">That's What the Framework Does</span>
+      <p class="cb-dark-statement reveal" style="--rd:0.06s">
+        Discover what your unconscious has pointed to for years, and what it hasn't.
+      </p>
+      <p class="cb-dark-body reveal" style="--rd:0.12s">
+        Fifteen questions. Five minutes. And a profile precise enough to feel like
+        someone's reading your mind.
+      </p>
+      <div class="reveal" style="--rd:0.18s">
+        <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn cb-btn-light">
+          <span>Take the assessment</span>
+          <span class="cb-btn-icon" aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ══ DESTINATIONS ══════════════════════════════════════ -->
-  <section class="cb-dest" id="cb-dest">
-    <div class="cb-dest-head reveal">
-      <div>
-        <span class="cb-eyebrow">Available Now</span>
-        <h2 class="cb-dest-title">Four ways into<br>the architecture</h2>
-      </div>
-      <p class="cb-dest-note">Start with the assessment, or read the story behind the framework.</p>
-    </div>
-
-    <div class="cb-bento">
-
-      <!-- Parser (feature) -->
-      <div class="cb-tile cb-tile--feat reveal" id="featTile">
-        <div class="cb-tile-inner">
-          <div class="cb-tile-kicker">Start here · Parser Profile™</div>
-          <h3 class="cb-tile-title">Discover the cognitive architecture you've used your whole life.</h3>
-          <p class="cb-tile-desc">
-            Fifteen questions. Five minutes. Your cognitive coordinates across three
-            gradient dimensions — a profile precise enough to feel like someone
-            finally read your mind.
-          </p>
-          <div class="cb-feat-foot">
-            <a href="https://cognitionblocksllc-parser-assessment-production.up.railway.app/" class="cb-btn cb-btn-light">
-              <span>Take the assessment</span>
-              <span class="cb-btn-icon" aria-hidden="true">→</span>
-            </a>
-            <span class="cb-feat-meta">Free results</span>
-          </div>
-        </div>
+  <!-- ══ LIGHT · BINET CHAPTER ═════════════════════════════ -->
+  <section class="cb-binet" id="cb-binet">
+    <div class="cb-binet-inner">
+      <div class="cb-binet-head">
+        <span class="cb-eyebrow reveal">The Cognition Block · Chapter 2</span>
+        <p class="cb-binet-lead reveal" style="--rd:0.06s">
+          History coined him the godfather of the Intelligence Quotient — <em>an insult</em>
+          to what he actually created, and why.
+        </p>
       </div>
 
-      <!-- The Story (Binet — inline narrated player) -->
-      <div class="cb-tile cb-tile--story reveal" style="--rd:0.06s">
-        <div class="cb-story-inner cb-sp" id="binet">
+      <div class="cb-binet-frame reveal" style="--rd:0.1s">
+        <div class="cb-binet-stage cb-sp" id="binet">
           <img class="cb-sp-img" id="spA" alt="" aria-hidden="true" />
           <img class="cb-sp-img" id="spB" alt="" aria-hidden="true" />
-          <img class="cb-sp-poster" id="spPoster" src="images/title.png" alt="Chapter 2 — The Story of Alfred Binet" loading="lazy" />
-          <div class="cb-story-grad"></div>
+          <img class="cb-sp-poster" id="spPoster" src="images/title.png" alt="Chapter 2 — JD Mercer" loading="lazy" />
+          <div class="cb-sp-grad"></div>
           <div class="cb-sp-top"><span class="cb-sp-counter"><b id="spNum">01</b> / 07</span></div>
-          <div class="cb-story-body">
-            <div class="cb-tile-kicker">Chapter 2 · Narrated</div>
-            <h3 class="cb-tile-title cb-sp-title" id="spTitle">The Story of Alfred Binet</h3>
+          <div class="cb-sp-body">
+            <div class="cb-sp-kicker">Chapter 2 · Narrated</div>
+            <h3 class="cb-sp-title" id="spTitle">JD Mercer</h3>
           </div>
-          <button class="cb-sp-play" id="spPlay" aria-label="Play the story of Alfred Binet"><span aria-hidden="true">▶</span></button>
-          <div class="cb-sp-bar" id="spBar" role="progressbar" aria-label="Story progress"><div class="cb-sp-fill" id="spFill"></div></div>
+          <button class="cb-sp-play" id="spPlay" aria-label="Play Chapter 2"><span aria-hidden="true">▶</span></button>
+          <div class="cb-sp-bar" id="spBar" role="progressbar" aria-label="Chapter progress"><div class="cb-sp-fill" id="spFill"></div></div>
           <audio id="spAudio" preload="none" src="images/CBI_Chapter_2.m4a"></audio>
         </div>
       </div>
-
-      <!-- Periodic Table -->
-      <a href="https://cbi-ptc-production.up.railway.app/" class="cb-tile cb-tile--ptc reveal" style="--rd:0.1s">
-        <div class="cb-tile-inner">
-          <div class="cb-tile-kicker">Live now</div>
-          <h3 class="cb-tile-title">Periodic Table of Cognition</h3>
-          <p class="cb-tile-desc">107 brain locations across 8 cognitive blocks — the map beneath the framework.</p>
-          <span class="cb-tile-go">Explore the table <span class="arc" aria-hidden="true">→</span></span>
-        </div>
-      </a>
-
-      <!-- The Reader -->
-      <a href="https://ddcot-production.up.railway.app/" class="cb-tile cb-tile--reader reveal" style="--rd:0.14s">
-        <div class="cb-tile-inner">
-          <div class="cb-tile-kicker">Live now</div>
-          <h3 class="cb-tile-title">The Reader</h3>
-          <p class="cb-tile-desc">Read the work in long form — the framework, in full, at your own pace.</p>
-          <span class="cb-tile-go">Open the reader <span class="arc" aria-hidden="true">→</span></span>
-        </div>
-      </a>
-
     </div>
   </section>
 
@@ -476,17 +381,6 @@ a.cb-tile:hover .arc { transform: translate(3px, -3px) scale(1.06); background: 
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
       els.forEach(function (e) { io.observe(e); });
-    }
-
-    // Pointer-glow on feature tile
-    var feat = document.getElementById('featTile');
-    if (feat && !reduce) {
-      var inner = feat.querySelector('.cb-tile-inner');
-      feat.addEventListener('mousemove', function (e) {
-        var r = inner.getBoundingClientRect();
-        inner.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-        inner.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-      });
     }
 
     // Mobile menu
